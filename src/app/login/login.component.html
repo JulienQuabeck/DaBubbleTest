@@ -17,11 +17,11 @@
         <div class="input-container">
             <div class="input-background">
                 <mat-icon fontIcon="mail"></mat-icon>
-                <input class="loginInput" placeholder="beispielname@email.com">
+                <input id="email" class="loginInput" autocomplete="email" placeholder="beispielname@email.com">
             </div>
             <div class="input-background">
                 <mat-icon fontIcon="lock"></mat-icon>
-                <input class="loginInput" placeholder="Passwort">
+                <input id="password" class="loginInput" type="password" placeholder="Passwort">
             </div>
             <a href="">Passwort vergessen?</a>
         </div>
@@ -41,7 +41,7 @@
 
         <div class="button-container">
             <button class="login-button" mat-flat-button>Anmelden</button>
-            <button class="guest-login-button" mat-flat-button routerLink="dashboard">Gäste-Login</button>
+            <button class="guest-login-button" mat-flat-button routerLink="/dashboard">Gäste-Login</button>
         </div>
 
     </mat-card>
