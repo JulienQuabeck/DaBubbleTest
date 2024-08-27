@@ -1,9 +1,8 @@
-<div class="blueScreen">
-    <div>LOGO</div>
-</div>
+<div class="blueScreen"></div>
+<div class="blueScreenLogo">Logo</div>
 <section>
     <mat-toolbar class="toolbar-header">
-        <span><img src="">Logo</span>
+        <span><img src=""></span>
         <span>
             <p>Neu bei DaBubble?</p>
             <a href="">Konto erstellen</a>
@@ -17,10 +16,12 @@
         </p>
         <div class="input-container">
             <div class="input-background">
-                <input placeholder="beispielname@email.com">
+                <mat-icon fontIcon="mail"></mat-icon>
+                <input class="loginInput" placeholder="beispielname@email.com">
             </div>
             <div class="input-background">
-                <input placeholder="Passwort">
+                <mat-icon fontIcon="lock"></mat-icon>
+                <input class="loginInput" placeholder="Passwort">
             </div>
             <a href="">Passwort vergessen?</a>
         </div>

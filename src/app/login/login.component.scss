@@ -1,31 +1,96 @@
-.blueScreen{
-    display:flex;
+.blueScreen {
+    display: flex;
     justify-content: center;
-    align-items:center;
-    z-index:0;
-    position:absolute;
-    top:0;
-    bottom:0;
-    left:0;
-    right:0;
+    align-items: center;
+    z-index: 2;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
     background-image: linear-gradient(rgb(117, 122, 241), rgb(78, 84, 229));
-    opacity:1;
+    opacity: 1;
     animation-name: intro;
     animation-duration: 2s;
+    animation-delay: 1s;
+    animation-fill-mode: forwards;
 }
 
-@keyframes intro{
+@keyframes intro {
     0% {
-        z-Index:2;
+        z-Index: 2;
+        opacity: 1;
+    }
+
+    10% {
+        opacity: 0.9;
+    }
+
+    20% {
+        opacity: 0.8;
+    }
+
+    30% {
+        opacity: 0.7;
+    }
+
+    40% {
         opacity: 0.6;
     }
-    50%{
-        z-index:1;
-        opacity:0.3;
+
+    50% {
+        z-index: 1;
+        opacity: 0.5;
     }
-    100%{
-        z-index:0;
+
+    60% {
+        opacity: 0.4;
+    }
+
+    70% {
+        opacity: 0.3;
+    }
+
+    80% {
+        opacity: 0.2;
+    }
+
+    90% {
+        opacity: 0.1;
+    }
+
+    100% {
+        z-index: 0;
         opacity: 0;
+    }
+}
+
+.blueScreenLogo {
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    width: 200px;
+    height: 100px;
+    position: absolute;
+    z-index: 999;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    font-size: 14px;
+    animation-name: logoIntro;
+    animation-duration: 2s;
+    animation-delay: 1s;
+    animation-fill-mode: forwards;    
+}
+
+@keyframes logoIntro{
+    0%{}
+    100%{
+        top:0;
+        left:0;
+        transform: translate(0,0);
     }
 }
 
@@ -38,6 +103,8 @@ section {
 
 .toolbar-header {
     width: 100%;
+    height: 120px;
+    padding: 30px;
     display: flex;
     justify-content: space-between;
 
@@ -79,13 +146,13 @@ section {
     width: 60%;
     position: absolute;
     left: 20%;
-    height: calc(100% - 200px);
-    top: 100px;
+    height: calc(100% - 224px);
+    top: 140px;
     align-items: center;
     padding: 20px;
 
-    mat-card-content{
-        margin-bottom:20px;
+    mat-card-content {
+        margin-bottom: 20px;
     }
 
     p {
@@ -180,13 +247,38 @@ section {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-bottom:20px;
+    margin-bottom: 20px;
+    position:relative;
 
-    &:hover{
-        cursor:text;
+    &:hover {
+        cursor: text;
+    }
+
+    mat-icon{
+        position:absolute;
+        left:10px;
+        transform: scale(0.8);
+        color:gray;
     }
 }
 
-.input-google{
-    color:rgb(70, 77, 224);
+.input-google {
+    color: rgb(70, 77, 224);
+}
+
+.loginInput{
+    background-color:rgb(235, 238, 253);
+    height:40px;
+    box-sizing: border-box;
+    border-radius:(0 20px 20px 0);
+    width:220px;
+    position:absolute;
+    right:0;
+    border:unset;
+    padding-right:10px;
+
+    &:focus{
+        outline:none;
+        border:none;
+    }
 }
