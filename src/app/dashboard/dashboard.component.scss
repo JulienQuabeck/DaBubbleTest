@@ -1,0 +1,39 @@
+section{
+    background-color:rgb(235,238,253);
+    width:100vw;
+    height:100%;
+    display:flex;
+    flex-direction: column;
+}
+
+.content-container{
+    display:flex;
+    height:100%;
+}
+
+app-dashboard-channels{
+    width:calc(20% - 16px);
+    height:100%;
+    background-color:white;
+    // border:2px;
+    border-radius:20px;
+    margin:8px;
+}
+
+app-dashboard-chat{
+    width:calc(55% - 16px);
+    height:100%;
+    background-color:white;
+    // border:2px;
+    border-radius:20px;
+    margin:8px;
+}
+
+app-dashboard-thread{
+    width:calc(25% - 16px);
+    height:100%;
+    background-color:white;
+    // border:2px;
+    border-radius:20px;
+    margin:8px;
+}
