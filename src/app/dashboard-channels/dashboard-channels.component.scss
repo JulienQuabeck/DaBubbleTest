@@ -1,0 +1,119 @@
+.headline-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.editName{
+    &:hover{
+        cursor:pointer;
+    }
+}
+
+.headline-image {
+    img {
+        width: 50px;
+        height: 50px;
+        border-radius: 100%;
+    }
+}
+
+.headline {
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.channels {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.direct-messages-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: column;
+}
+
+.channel-header,
+.messages-header {
+    display: flex;
+    justify-content: flex-start;
+    gap: 5%;
+    align-items: center;
+    width: 85%;
+    font-size: 16px;
+    font-weight: bold;
+
+    .dropdown{
+        &:hover{
+            cursor:pointer;
+        }
+    }
+}
+
+.add {
+    width: 15%;
+    &:hover{
+        cursor:pointer;
+    }
+}
+
+.addChannel {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin: 20px 15%;
+    &:hover{
+        cursor:pointer;
+    }
+}
+
+.createdChannels {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 16px;
+    font-weight: bold;
+    color: rgb(134, 60, 134);
+    background-color: rgb(235, 238, 253);
+    border-radius: 20px;
+    width: 70%;
+    height: 30px;
+    margin: 20px 15%;
+}
+
+.memberImage {
+    img {
+        width: 50px;
+        height: 50px;
+        border-radius: 100%;
+    }
+}
+
+.members {
+    margin-top: 16px;
+    width:90%;
+    margin-left:10%;
+
+    div {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 8px;
+        margin: 8px 0;
+        border-radius:20px;
+
+        &:hover {
+            cursor: pointer;
+            background-color: rgb(240, 240, 240);
+            
+        }
+    }
+}
+
+.memberName {
+    font-size: 16px;
+}
