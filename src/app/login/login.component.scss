@@ -131,11 +131,18 @@ section {
     span {
         width: 50%;
         display: flex;
-        justify-content: space-between;
+        justify-content: center;
+        gap: 100px;
 
         a {
             text-decoration: none;
             color: rgb(149, 147, 221);
+            padding:5px;
+            &:hover{
+                padding:3px;
+                border: 2px solid rgb(149, 147, 221);
+                border-radius:20px;
+            }
         }
     }
 }
@@ -145,11 +152,12 @@ section {
     border-radius: 20px;
     width: 60%;
     position: absolute;
-    left: 20%;
+    left: calc((100% - 1024px) / 2); //20%
     height: calc(100% - 224px);
     top: 140px;
     align-items: center;
     padding: 20px;
+    max-width:1024px;
 
     mat-card-content {
         margin-bottom: 20px;
@@ -242,7 +250,7 @@ section {
 .input-background {
     background-color: rgb(235, 238, 253);
     border-radius: 20px;
-    height: 40px;
+    height: 44px;
     width: 70%;
     display: flex;
     justify-content: center;
@@ -252,6 +260,8 @@ section {
 
     &:hover {
         cursor: text;
+        border:2px solid rgb(149, 147, 221);
+        height:40px;
     }
 
     mat-icon{
