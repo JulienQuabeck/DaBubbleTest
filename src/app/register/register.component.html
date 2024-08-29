@@ -1,0 +1,32 @@
+<section>
+    <mat-card class="register">
+        <mat-card-title class="title">Registrierung</mat-card-title>
+        <form class="register-form">
+            <div class="container">
+                <div class="left-container">
+                    <div class="input-background">
+                        <input name="Name" id="Name" autocomplete="Name" placeholder="Name" required>
+                    </div>
+                    <div class="input-background">
+                        <input name="Nachname" id="Nachname" autocomplete="Nachname" placeholder="Nachname" required>
+                    </div>
+                    <div class="input-background">
+                        <input name="E-Mail" id="E-Mail" autocomplete="E-Mail" placeholder="E-Mail" required>
+                    </div>
+                </div>
+                <div class="right-container">
+                    <div class="input-background">
+                        <input name="Passwort" id="Passwort" type="password" autocomplete="Passwort" placeholder="Passwort" required>
+                    </div>
+                    <div class="input-background">
+                        <input name="wdh-Passwort" id="wdh-Passwort" type="password" autocomplete="wdh-Passwort" placeholder="Passwort wiederholen" required>
+                    </div>
+                    <div class="button-container">
+                        <button mat-flat-button routerLink="/">zurück</button>
+                        <button mat-flat-button routerLink="/dashboard" (click)="registerUser()">registrieren</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </mat-card>
+</section>

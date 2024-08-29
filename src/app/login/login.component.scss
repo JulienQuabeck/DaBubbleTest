@@ -66,7 +66,7 @@
 }
 
 .blueScreenLogo {
-    display:flex;
+    display: flex;
     justify-content: center;
     align-items: center;
     width: 200px;
@@ -82,15 +82,16 @@
     animation-name: logoIntro;
     animation-duration: 2s;
     animation-delay: 1s;
-    animation-fill-mode: forwards;    
+    animation-fill-mode: forwards;
 }
 
-@keyframes logoIntro{
-    0%{}
-    100%{
-        top:0;
-        left:0;
-        transform: translate(0,0);
+@keyframes logoIntro {
+    0% {}
+
+    100% {
+        top: 0;
+        left: 0;
+        transform: translate(0, 0);
     }
 }
 
@@ -99,6 +100,9 @@ section {
     height: 100%;
     background-color: rgba(235, 238, 253, 1);
     position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .toolbar-header {
@@ -137,11 +141,12 @@ section {
         a {
             text-decoration: none;
             color: rgb(149, 147, 221);
-            padding:5px;
-            &:hover{
-                padding:3px;
+            padding: 5px;
+
+            &:hover {
+                padding: 3px;
                 border: 2px solid rgb(149, 147, 221);
-                border-radius:20px;
+                border-radius: 20px;
             }
         }
     }
@@ -152,19 +157,19 @@ section {
     border-radius: 20px;
     width: 60%;
     position: absolute;
-    left: calc((100% - 1024px) / 2); //20%
     height: calc(100% - 224px);
     top: 140px;
     align-items: center;
     padding: 20px;
-    max-width:1024px;
+    max-width: 1024px;
 
     mat-card-content {
-        margin-bottom: 20px;
+        margin-bottom: 5%;
     }
 
     p {
         text-align: center;
+        margin-bottom: 5%;
     }
 }
 
@@ -173,23 +178,85 @@ section {
     color: rgb(70, 77, 224);
     font-weight: bold;
     font-size: 40px;
+    margin-top: 5%;
+    margin-bottom: 5%;
 }
 
-.input-container {
-    width: 100%;
+form {
+    width: 90%;
     display: flex;
     flex-direction: column;
+    justify-content: center;
     align-items: center;
 
-    form {
+    .input-container {
+        width: 100%;
         display: flex;
         flex-direction: column;
+        justify-content: center;
         align-items: center;
+
+        div {
+            background-color: rgb(235, 238, 253);
+            border-radius: 20px;
+            height: 44px;
+            width: 70%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 20px;
+            position: relative;
+
+            &:hover {
+                cursor: text;
+                border: 2px solid rgb(149, 147, 221);
+                height: 40px;
+            }
+
+            mat-icon {
+                position: absolute;
+                left: 10px;
+                transform: scale(0.8);
+                color: gray;
+            }
+
+            input {
+                border: unset;
+                background-color: rgb(235, 238, 253);
+                width: 85%;
+                height: 100%;
+                box-sizing: border-box;
+                margin-left: 40px;
+
+                &:focus {
+                    outline: unset;
+                    border: unset;
+                }
+            }
+        }
     }
 
     a {
+        margin-top: 5%;
         text-decoration: none;
         color: rgb(149, 147, 221);
+        margin-bottom: 5%;
+    }
+}
+
+.input-google-container {
+    background-color: rgb(235, 238, 253);
+    border-radius: 20px;
+    height: 44px;
+    width: 70%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &:hover {
+        cursor: text;
+        border: 2px solid rgb(149, 147, 221);
+        height: 40px;
     }
 }
 
@@ -207,7 +274,7 @@ section {
 .divider-container {
     display: flex;
     position: relative;
-    margin: 20px 0;
+    margin-bottom: 5%;
 
     .h-line {
         border-top: 1px solid black;
@@ -245,50 +312,26 @@ section {
     width: 100%;
     display: flex;
     justify-content: center;
-}
-
-.input-background {
-    background-color: rgb(235, 238, 253);
-    border-radius: 20px;
-    height: 44px;
-    width: 70%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 20px;
-    position:relative;
-
-    &:hover {
-        cursor: text;
-        border:2px solid rgb(149, 147, 221);
-        height:40px;
-    }
-
-    mat-icon{
-        position:absolute;
-        left:10px;
-        transform: scale(0.8);
-        color:gray;
-    }
+    margin-bottom: 5%;
 }
 
 .input-google {
     color: rgb(70, 77, 224);
 }
 
-.loginInput{
-    background-color:rgb(235, 238, 253);
-    height:40px;
+.loginInput {
+    background-color: rgb(235, 238, 253);
+    height: 40px;
     box-sizing: border-box;
-    border-radius:(0 20px 20px 0);
-    width:90%;
-    position:absolute;
-    right:0;
-    border:unset;
-    padding-right:10px;
+    border-radius: (0 20px 20px 0);
+    width: 90%;
+    position: absolute;
+    right: 0;
+    border: unset;
+    padding-right: 10px;
 
-    &:focus{
-        outline:none;
-        border:none;
+    &:focus {
+        outline: none;
+        border: none;
     }
 }

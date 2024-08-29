@@ -5,7 +5,7 @@
         <span><img src=""></span>
         <span>
             <p>Neu bei DaBubble?</p>
-            <a href="">Konto erstellen</a>
+            <a routerLink="register">Konto erstellen</a>
         </span>
     </mat-toolbar>
 
@@ -14,39 +14,41 @@
         <p>
             Wir empfehlen dir, die E-Mail Adresse zu nutzen, die <br /> du bei der Arbeit verwendest.
         </p>
-        <div class="input-container">
-            <div class="input-background">
-                <mat-icon fontIcon="mail"></mat-icon>
-                <input id="email" class="loginInput" autocomplete="email" placeholder="beispielname@email.com">
+        <form>
+            <div class="input-container">
+                <div class="input-background">
+                    <mat-icon fontIcon="mail"></mat-icon>
+                    <input name="email" id="email" [(ngModel)]="email" autocomplete="email"
+                        placeholder="beispielname@email.com" required>
+                </div>
+                <div class="input-background">
+                    <mat-icon fontIcon="lock"></mat-icon>
+                    <input name="password" id="password" [(ngModel)]="password" type="password" placeholder="Passwort"
+                        required>
+                </div>
+
+                <a href="">Passwort vergessen?</a>
             </div>
-            <div class="input-background">
-                <mat-icon fontIcon="lock"></mat-icon>
-                <input id="password" class="loginInput" type="password" placeholder="Passwort">
+
+            <div class="divider-container">
+                <div class="h-line"></div>
+                <div>ODER</div>
+                <div class="h-line"></div>
             </div>
-            <a href="">Passwort vergessen?</a>
-        </div>
 
-        <div class="divider-container">
-            <div class="h-line"></div>
-            <div>ODER</div>
-            <div class="h-line"></div>
-        </div>
-
-        <div class="login-google">
-            <div class="input-background input-google cursor-pointer">
-                <img src="">
-                Anmeldung mit Google
+            <div class="login-google">
+                <div class="input-google-container input-google cursor-pointer">
+                    <img src="">
+                    Anmeldung mit Google
+                </div>
             </div>
-        </div>
 
-        <div class="button-container">
-            <button class="login-button" mat-flat-button>Anmelden</button>
-            <button class="guest-login-button" mat-flat-button routerLink="/dashboard">Gäste-Login</button>
-        </div>
-
+            <div class="button-container">
+                <button class="login-button" mat-flat-button (click)="login()">Anmelden</button>
+                <button class="guest-login-button" mat-flat-button routerLink="/dashboard">Gäste-Login</button>
+            </div>
+        </form>
     </mat-card>
-
-
 
     <mat-toolbar class="toolbar-footer">
         <span>
