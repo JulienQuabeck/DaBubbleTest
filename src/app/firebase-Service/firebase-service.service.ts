@@ -129,8 +129,21 @@ export class FirebaseServiceService {
       return true;
     } else {
       return false;
-      console.log("No password found for this email.");
     }
+  }
+
+  /**
+   * This function gets the name for the email the users wants to change the password for
+   */
+  async getName(){
+
+  }
+
+    /**
+   * This function gets the surname for the email the users wants to change the password for
+   */
+  async getNachname(){
+
   }
 }
 
