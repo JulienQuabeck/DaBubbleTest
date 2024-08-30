@@ -40,6 +40,10 @@ export class LoginComponent {
 
   }
 
+  /**
+   * This function checks, if the entered email-adress is saved in the firebase database, if so, it checks the entered password with the saved one for the entered email.
+   * If both exists and is correct, the user will be moved to the dashboard, if not an error will be displayed
+   */
   async login() {
     let emailExists = this.firebase.findUserWithEmail(this.email)    
     if (await emailExists) {
@@ -47,19 +51,23 @@ export class LoginComponent {
       if(passwordVerified){
         this.router.navigate(['/dashboard']);
       }else{
-        this.emailOrPasswordWrong = true;
-        setTimeout( ()=> {
-          this.emailOrPasswordWrong = false;
-        },4000);
+        this.setTimeoutForErrorMessage();
       }
     } else {
-      this.emailOrPasswordWrong = true;
-      setTimeout( ()=> {
-        this.emailOrPasswordWrong = false;
-      },4000);
-
+      this.setTimeoutForErrorMessage();
     }
     this.email = '';
     this.password = '';
   }
+
+  /**
+   * This function toggles the emailOrPasswordWrong boolean to display an error message
+   */
+  setTimeoutForErrorMessage(){
+    this.emailOrPasswordWrong = true;
+    setTimeout( ()=> {
+      this.emailOrPasswordWrong = false;
+    },4000);
+  }
 }
+
