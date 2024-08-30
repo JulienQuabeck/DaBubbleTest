@@ -5,28 +5,48 @@
             <div class="container">
                 <div class="left-container">
                     <div class="input-background">
-                        <input name="Name" id="Name" [(ngModel)]="user.name" autocomplete="Name" placeholder="Name" required>
+                        <input name="Name" id="Name" [(ngModel)]="user.name" autocomplete="Name" placeholder="Name"
+                            required>
                     </div>
                     <div class="input-background">
-                        <input name="Nachname" id="Nachname" [(ngModel)]="user.nachname" autocomplete="Nachname" placeholder="Nachname" required>
+                        <input name="Nachname" id="Nachname" [(ngModel)]="user.nachname" autocomplete="Nachname"
+                            placeholder="Nachname" required>
                     </div>
                     <div class="input-background">
-                        <input name="E-Mail" id="E-Mail" [(ngModel)]="user.email" autocomplete="E-Mail" placeholder="E-Mail" required>
+                        <input name="E-Mail" id="E-Mail" [(ngModel)]="user.email" autocomplete="E-Mail"
+                            placeholder="E-Mail" required>
                     </div>
                 </div>
                 <div class="right-container">
                     <div class="input-background">
-                        <input name="Passwort" id="Passwort" [(ngModel)]="user.passwort" type="password" autocomplete="Passwort" placeholder="Passwort" required>
+                        <input name="Passwort" id="Passwort" [(ngModel)]="user.passwort" type="password"
+                            autocomplete="Passwort" placeholder="Passwort" required>
                     </div>
                     <div class="input-background">
-                        <input name="wdh-Passwort" id="wdh-Passwort" type="password" autocomplete="wdh-Passwort" placeholder="Passwort wiederholen" required>
+                        <input name="wdh-Passwort" id="wdh-Passwort" type="password" autocomplete="wdh-Passwort"
+                            placeholder="Passwort wiederholen" required>
                     </div>
                     <div class="button-container">
                         <button mat-flat-button routerLink="/">zurück</button>
-                        <button mat-flat-button routerLink="/dashboard" (click)="registerUser()">registrieren</button>
+                        <button mat-flat-button (click)="registerUser()">registrieren</button>
+                        <!-- <button mat-flat-button routerLink="/dashboard" (click)="registerUser()">registrieren</button> -->
                     </div>
                 </div>
             </div>
         </form>
     </mat-card>
 </section>
+@if(loading){
+<div class="loadingScreen">
+    <mat-spinner></mat-spinner>
+</div>
+}
+
+@if(UserAlreadyExists){
+    <div class="existingUser">
+        <div>
+            <h1>Diese verwendete E-mail existiert bereits. Bitte loggen Sie sich mit dieser ein.</h1>
+            <h2>Sollten Sie ihr Passwort vergessen haben, dann klicken sie unterhalb des Login-Bereichs auf "Passwort vergessen".</h2>
+        </div>
+    </div>
+}

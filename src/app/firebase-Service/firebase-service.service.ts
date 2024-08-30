@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { initializeApp } from "firebase/app";
-import { getFirestore, Firestore, collection, doc, addDoc, updateDoc } from "firebase/firestore";
+import { getFirestore, Firestore, collection, doc, addDoc, updateDoc, query, where, getDocs } from "firebase/firestore";
 import { User } from '../../models/user.class';
 
 const firebaseConfig = {
@@ -18,18 +18,38 @@ const firestore = getFirestore(app);
 @Injectable({
   providedIn: 'root'
 })
+
 export class FirebaseServiceService {
 
-  constructor(private firestore: Firestore) { }
+  private firestore: Firestore;
 
-  getUserRef(){
-    return collection(this.firestore, 'user');
+  constructor() {
+    this.firestore = firestore;
   }
 
+  /**
+   * This function returns the UserRef from Firebase
+   * @returns UserRef from Firebase
+   */
+  getUserRef() {
+    return collection(this.firestore, 'user');
+
+  }
+
+  /**
+   * This function returns the DocRef from Firebase
+   * @param colId id of the collection
+   * @param docId id of the document
+   * @returns the docId / docRef
+   */
   getSingleUserRef(colId: string, docId: string) {
     return doc(collection(this.firestore, colId), docId);
   }
 
+  /**
+   * This function adds a new User to the Firebase
+   * @param item the Document / the userdata
+   */
   async addUser(item: {}) {
     await addDoc(this.getUserRef(), item).catch(
       (err) => {
@@ -37,28 +57,54 @@ export class FirebaseServiceService {
       }
     ).then(
       (docRef) => {
-        console.log("Document written with ID: ", docRef?.id);//colID
+        // console.log("Document written with ID: ", docRef?.id);//colID
         this.addingdocRefToUser(item, docRef?.id);
       }
     )
   }
 
+  /**
+   * This function adds the automatically cenerated id from firebase to the userdoc
+   * @param item the Document / the userdata
+   * @param docId the generated docRef
+   */
   async addingdocRefToUser(item: any, docId: any) {
-    item.id = docId;
-    await updateDoc(this.getSingleUserRef("users", docId), item).catch(
+    item.id = docId;    
+    await updateDoc(this.getSingleUserRef("user", docId), item).catch(
       (err) => { console.log(err); }
     )
   }
 
+  /**
+   * This function sets all given data to a structured user Object
+   * @param obj userdata
+   * @returns the user object
+   */
   setUserObject(obj: any): User {
     return {
       id: obj.id || "",
       name: obj.name || "",
       nachname: obj.nachname || "",
-      email: obj.email ||"",
+      email: obj.email || "",
       passwort: obj.passwort || "",
     }
   }
 
+  async findUserWithEmail(email:string){
+    try {
+      // Create a query against the collection with the email
+      const q = query(this.getUserRef(), where("email", "==", email));
+      const querySnapshot = await getDocs(q);
+
+      // If there is at least one document, the email exists
+      return!querySnapshot.empty;
+      // console.log(querySnapshot.empty);
+      
+    } catch (err) {
+      console.error("Error checking email existence: ", err);
+      return false;
+      // console.log(false);  
+    }
+  }
 }
 
