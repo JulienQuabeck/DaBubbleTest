@@ -335,3 +335,28 @@ form {
         border: none;
     }
 }
+
+.emailOrPasswirdWrong-Container{
+    z-index:998;
+    background-color:white;
+    position:absolute;
+    top:0;
+    bottom:0;
+    right:0;
+    left:0;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    opacity:0.9;
+    div{
+        z-index:999;
+        width:50%;
+        border:1px solid black;
+        border-radius:20px;
+        padding:20px;
+        opacity: 1;
+        color:black;
+        font-weight:bold;
+        text-align:center;
+    }
+}

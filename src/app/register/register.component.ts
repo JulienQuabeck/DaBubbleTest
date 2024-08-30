@@ -43,7 +43,6 @@ export class RegisterComponent {
     this.loading = true;
     let Emailexists = this.firebase.findUserWithEmail(this.user.email);
     if (await Emailexists) {
-      console.log('Email vorhanden');
       this.UserAlreadyExists = true;
       setTimeout(()=>{
         this.UserAlreadyExists = false;

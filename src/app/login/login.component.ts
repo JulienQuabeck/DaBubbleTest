@@ -6,11 +6,10 @@ import { MatInputModule } from '@angular/material/input';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatButtonModule } from '@angular/material/button';
 import { DashboardComponent } from '../dashboard/dashboard.component';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { RegisterComponent } from '../register/register.component';
 import { FirebaseServiceService } from '../firebase-Service/firebase-service.service';
-import { getDocs } from 'firebase/firestore';
 
 @Component({
   selector: 'app-login',
@@ -35,41 +34,32 @@ export class LoginComponent {
   email: string = '';
   password: string = '';
   loginPossible: boolean = false;
+  emailOrPasswordWrong: boolean = false;
 
-  constructor(public firebase: FirebaseServiceService) {
+  constructor(public firebase: FirebaseServiceService, private router: Router) {
 
   }
 
   async login() {
-    console.log(this.email, this.password);
-    // let j = this.numberOfRegisteredUsers();
-    // for(let i = 0; i < await j; i++){
-    //   console.log(i);
-    // }
+    let emailExists = this.firebase.findUserWithEmail(this.email)    
+    if (await emailExists) {
+      let passwordVerified = await this.firebase.verifyPassword(this.email, this.password);      
+      if(passwordVerified){
+        this.router.navigate(['/dashboard']);
+      }else{
+        this.emailOrPasswordWrong = true;
+        setTimeout( ()=> {
+          this.emailOrPasswordWrong = false;
+        },4000);
+      }
+    } else {
+      this.emailOrPasswordWrong = true;
+      setTimeout( ()=> {
+        this.emailOrPasswordWrong = false;
+      },4000);
+
+    }
     this.email = '';
     this.password = '';
   }
-
-  // async numberOfRegisteredUsers() {
-  //   try {
-  //     const querySnapshot = await getDocs(this.firebase.getUserRef());
-  //     return querySnapshot.size;  // Returns the number of documents in the collection
-
-  //   } catch (err) {
-  //     console.error("Error getting document count: ", err);
-  //     return 0;
-  //   }
-  // }
-
-
-  checkLogin() {
-    if (this.email && this.password) {
-      this.loginPossible = true;
-      console.log(this.loginPossible);
-    } else {
-      this.loginPossible = false;
-      console.log(this.loginPossible);
-    }
-  }
-
 }

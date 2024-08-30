@@ -69,7 +69,7 @@ export class FirebaseServiceService {
    * @param docId the generated docRef
    */
   async addingdocRefToUser(item: any, docId: any) {
-    item.id = docId;    
+    item.id = docId;
     await updateDoc(this.getSingleUserRef("user", docId), item).catch(
       (err) => { console.log(err); }
     )
@@ -90,21 +90,49 @@ export class FirebaseServiceService {
     }
   }
 
-  async findUserWithEmail(email:string){
+  /**
+   * This function checks, if the entered Email already exists in the firebase database or not.
+   * @param email in the form entered Email
+   * @returns true / false
+   */
+  async findUserWithEmail(email: string) {
     try {
-      // Create a query against the collection with the email
       const q = query(this.getUserRef(), where("email", "==", email));
       const querySnapshot = await getDocs(q);
-
-      // If there is at least one document, the email exists
-      return!querySnapshot.empty;
-      // console.log(querySnapshot.empty);
-      
+      return !querySnapshot.empty;
     } catch (err) {
       console.error("Error checking email existence: ", err);
       return false;
-      // console.log(false);  
+    }
+  }
+
+  async getPasswort(email: string) {
+    try {
+      const q = query(this.getUserRef(), where("email", "==", email));
+      const querySnapshot = await getDocs(q);
+      if (!querySnapshot.empty) {
+        const userDoc = querySnapshot.docs[0];
+        const userData = userDoc.data();
+        const password = userData['passwort']; // Hier wird das Passwort abgerufen
+        return password; // Gebe das Passwort zurück oder nutze es entsprechend
+      }
+      return !querySnapshot.empty;
+    } catch (err) {
+      console.error("Error checking email existence: ", err);
+      return false;
+    }
+  }
+
+  async verifyPassword(email:string, enteredPasswort: string){
+    const password = await this.getPasswort(email);
+    if (password == enteredPasswort) {
+      return true;
+    } else {
+      return false;
+      console.log("No password found for this email.");
     }
   }
 }
+
+
 
