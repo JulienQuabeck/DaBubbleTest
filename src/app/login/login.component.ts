@@ -10,6 +10,8 @@ import { Router, RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { RegisterComponent } from '../register/register.component';
 import { FirebaseServiceService } from '../firebase-Service/firebase-service.service';
+import { PasswordForgottenComponent } from '../password-forgotten/password-forgotten.component';
+
 
 @Component({
   selector: 'app-login',
@@ -24,7 +26,8 @@ import { FirebaseServiceService } from '../firebase-Service/firebase-service.ser
     MatButtonModule,
     DashboardComponent,
     FormsModule,
-    RegisterComponent
+    RegisterComponent,
+    PasswordForgottenComponent
   ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss'
@@ -36,21 +39,19 @@ export class LoginComponent {
   loginPossible: boolean = false;
   emailOrPasswordWrong: boolean = false;
 
-  constructor(public firebase: FirebaseServiceService, private router: Router) {
-
-  }
+  constructor(public firebase: FirebaseServiceService, private router: Router) { }
 
   /**
    * This function checks, if the entered email-adress is saved in the firebase database, if so, it checks the entered password with the saved one for the entered email.
    * If both exists and is correct, the user will be moved to the dashboard, if not an error will be displayed
    */
   async login() {
-    let emailExists = this.firebase.findUserWithEmail(this.email)    
+    let emailExists = this.firebase.findUserWithEmail(this.email)
     if (await emailExists) {
-      let passwordVerified = await this.firebase.verifyPassword(this.email, this.password);      
-      if(passwordVerified){
+      let passwordVerified = await this.firebase.verifyPassword(this.email, this.password);
+      if (passwordVerified) {
         this.router.navigate(['/dashboard']);
-      }else{
+      } else {
         this.setTimeoutForErrorMessage();
       }
     } else {
@@ -63,11 +64,11 @@ export class LoginComponent {
   /**
    * This function toggles the emailOrPasswordWrong boolean to display an error message
    */
-  setTimeoutForErrorMessage(){
+  setTimeoutForErrorMessage() {
     this.emailOrPasswordWrong = true;
-    setTimeout( ()=> {
+    setTimeout(() => {
       this.emailOrPasswordWrong = false;
-    },4000);
+    }, 4000);
   }
 }
 

@@ -235,12 +235,15 @@ form {
             }
         }
     }
+}
 
-    a {
-        margin-top: 5%;
-        text-decoration: none;
-        color: rgb(149, 147, 221);
-        margin-bottom: 5%;
+.pwForgotten {
+    margin-top: 5%;
+    text-decoration: none;
+    color: rgb(149, 147, 221);
+    margin-bottom: 5%;
+    &:hover{
+        cursor:pointer;
     }
 }
 
