@@ -16,7 +16,7 @@ export class PasswordForgottenComponent {
   email: string = '';
   name: string = '';
   nachname: string = '';
-  password:string = '';
+  password: string = '';
   repeatedPassword: string = '';
   buttonDisabled: boolean = true;
   MailInputDisabled: boolean = false;
@@ -25,6 +25,7 @@ export class PasswordForgottenComponent {
   displayfurtherQuestions: boolean = false;
   displayfurtherQuestions2: boolean = false;
   displayNewPasswordInputs: boolean = false;
+  displayError: boolean = false;
 
   constructor(public firebase: FirebaseServiceService) {
 
@@ -36,53 +37,99 @@ export class PasswordForgottenComponent {
   async getEmailFromFirebase() {
     if (!this.buttonDisabled) {
       let emailExists = this.firebase.findUserWithEmail(this.email);
-      if(await emailExists){
+      if (await emailExists) {
         this.displayfurtherQuestions = true;
         this.disableMailInput();
         this.buttonDisabled = true;
-      }else{
+      } else {
         this.displayfurtherQuestions = false;
       }
     }
   }
 
-/**
- * This function checks, if an input-Element is empty or not. If it is empty it sets the var "buttonDisabled" to true, sothat the button is disabled
- * @param inputvalue id of the input-Element
- */
-  checkInput(inputvalue:string) {
-    if(inputvalue.trim().length === 0){
+  /**
+   * This function checks, if an input-Element is empty or not. If it is empty it sets the var "buttonDisabled" to true, sothat the button is disabled
+   * @param inputvalue id of the input-Element
+   */
+  checkInput(inputvalue: string) {
+    if (inputvalue.trim().length === 0) {
       this.buttonDisabled = true;
-    }else{
-      this.buttonDisabled = false;    
+    } else {
+      this.buttonDisabled = false;
     }
   }
 
   /**
    * This function sets the MailInputDisabled Variable to true, so that the input for the mail adress will be disabled.
    */
-  disableMailInput(){
+  disableMailInput() {
     this.MailInputDisabled = true;
+  }
+
+  /**
+   * This function checks, if the written name is similar to the saved on in the firebase database
+   */
+  async getNameFromFirebase() {
+    let nameFromFirebase = this.firebase.getName(this.name);
+    if (await nameFromFirebase == this.name) {
+      this.displayNachnameInput();
+    } else {
+      this.toggleDisplayError();
+      console.log('Name fehlerhaft');
+    }
   }
 
   /**
    * This function sets the displayfurtherQuestions2 Variable to true
    */
-  displayNachnameInput(){
+  displayNachnameInput() {
     this.nameInputDisabled = true;
     this.displayfurtherQuestions2 = true;
   }
 
-    /**
-   * This function sets the displayPasswortInputs variable to true
-   */
-  displayPasswortInputs(){
+  /**
+ * This function checks, if the written "Nachname" (=lastname) is similar to the saved on in the firebase database
+ */
+  async getnachnameFromFirebase() {
+    let nachnameFromFirebase = this.firebase.getNachname(this.nachname);
+    if (await nachnameFromFirebase == this.nachname) {
+      console.log(nachnameFromFirebase);
+      console.log(this.nachname);
+      this.displayPasswortInputs();
+    } else {
+      this.toggleDisplayError();
+      console.log('Nachname fehlerhaft');
+    }
+  }
+
+  /**
+ * This function sets the displayPasswortInputs variable to true
+ */
+  displayPasswortInputs() {
     this.nachnameInputDisabled = true;
     this.displayNewPasswordInputs = true;
   }
 
-  updatePassword(){
-    
+  /**
+   * This function updates the user password in the firebase database
+   */
+  updatePassword() {
+    if(this.password === this.repeatedPassword){
+      console.log('neues Passwort lautet: ', this.password);
+    }else{
+      this.toggleDisplayError()
+      console.log('die Passwörter stimmen nicht überein!');
+    }
+  }
+
+  /**
+   * This function toggles a variable to display an Error-Message for 4 seconds
+   */
+  toggleDisplayError(){
+    this.displayError = true;
+    setTimeout(()=>{
+      this.displayError = false;
+    },4000);
   }
 
 }

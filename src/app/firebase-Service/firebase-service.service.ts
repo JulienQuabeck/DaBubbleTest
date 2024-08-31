@@ -33,7 +33,6 @@ export class FirebaseServiceService {
    */
   getUserRef() {
     return collection(this.firestore, 'user');
-
   }
 
   /**
@@ -106,6 +105,11 @@ export class FirebaseServiceService {
     }
   }
 
+  /**
+   * This function reads the password from the firebase database and returns it to the calling function
+   * @param email given variable
+   * @returns the password
+   */
   async getPasswort(email: string) {
     try {
       const q = query(this.getUserRef(), where("email", "==", email));
@@ -123,6 +127,12 @@ export class FirebaseServiceService {
     }
   }
 
+  /**
+   * This function checks, if the written passwords is similar to the saved one in the firebase database
+   * @param email  given variable
+   * @param enteredPasswort written password
+   * @returns true or false
+   */
   async verifyPassword(email:string, enteredPasswort: string){
     const password = await this.getPasswort(email);
     if (password == enteredPasswort) {
@@ -135,15 +145,41 @@ export class FirebaseServiceService {
   /**
    * This function gets the name for the email the users wants to change the password for
    */
-  async getName(){
-
+  async getName(name:string){
+    try {
+      const q = query(this.getUserRef(), where("name", "==", name));
+      const querySnapshot = await getDocs(q);
+      if (!querySnapshot.empty) {
+        const userDoc = querySnapshot.docs[0];
+        const userData = userDoc.data();
+        const name = userData['name']; // Hier wird der name abgerufen
+        return name; // Gebe den namen zurück oder nutze es entsprechend
+      }
+      return !querySnapshot.empty;
+    } catch (err) {
+      console.error("Error checking name existence: ", err);
+      return false;
+    }
   }
 
     /**
    * This function gets the surname for the email the users wants to change the password for
    */
-  async getNachname(){
-
+  async getNachname(nachname:string){
+    try {
+      const q = query(this.getUserRef(), where("nachname", "==", nachname));
+      const querySnapshot = await getDocs(q);
+      if (!querySnapshot.empty) {
+        const userDoc = querySnapshot.docs[0];
+        const userData = userDoc.data();
+        const nachname = userData['nachname']; // Hier wird der nachname abgerufen
+        return nachname; // Gebe den nachnamen zurück oder nutze es entsprechend
+      }
+      return !querySnapshot.empty;
+    } catch (err) {
+      console.error("Error checking nachname existence: ", err);
+      return false;
+    }
   }
 }
 
