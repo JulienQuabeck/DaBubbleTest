@@ -89,6 +89,12 @@ export class FirebaseServiceService {
     }
   }
 
+  async gettingQuery(email:string){
+    const q = query(this.getUserRef(), where("email", "==", email));
+    const querySnapshot = await getDocs(q);  
+    return querySnapshot;
+  }
+
   /**
    * This function checks, if the entered Email already exists in the firebase database or not.
    * @param email in the form entered Email
@@ -96,12 +102,26 @@ export class FirebaseServiceService {
    */
   async findUserWithEmail(email: string) {
     try {
-      const q = query(this.getUserRef(), where("email", "==", email));
-      const querySnapshot = await getDocs(q);
+      // const q = query(this.getUserRef(), where("email", "==", email));
+      // const querySnapshot = await getDocs(q);     
+      const querySnapshot = await this.gettingQuery(email); 
       return !querySnapshot.empty;
     } catch (err) {
       console.error("Error checking email existence: ", err);
       return false;
+    }
+  }
+
+  /**
+   * This functions returns the UserId regarding to the given Email
+   * @param email written email (in change Passwort section)
+   * @returns the userId in Firebase
+   */
+  async getUserId(email:string){
+    let querySnapshot = await this.gettingQuery(email);
+    if(!querySnapshot.empty){
+      let userId = await querySnapshot.docs[0].data()['id'];
+      return userId;
     }
   }
 
@@ -179,6 +199,23 @@ export class FirebaseServiceService {
     } catch (err) {
       console.error("Error checking nachname existence: ", err);
       return false;
+    }
+  }
+
+  async updatePasswort(user:User){
+    console.log(user);
+    // await updateDoc(this.getSingleUserRef("user", user.id), this.getCleanJson(user)).catch(
+    //   (err) => { console.log(err); });
+  }
+
+
+  getCleanJson(user: User):{}{
+    return {
+      id: user.id,
+      email: user.email,
+      name: user.name,
+      nachname: user.nachname,
+      passwort: user.passwort,
     }
   }
 }

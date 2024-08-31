@@ -3,6 +3,7 @@ import { FormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
 import { FirebaseServiceService } from '../firebase-Service/firebase-service.service';
 import { NgClass } from '@angular/common';
+import { User } from '../../models/user.class';
 
 @Component({
   selector: 'app-password-forgotten',
@@ -13,6 +14,7 @@ import { NgClass } from '@angular/common';
 })
 export class PasswordForgottenComponent {
 
+  userId: string = '';
   email: string = '';
   name: string = '';
   nachname: string = '';
@@ -26,7 +28,7 @@ export class PasswordForgottenComponent {
   displayfurtherQuestions2: boolean = false;
   displayNewPasswordInputs: boolean = false;
   displayError: boolean = false;
-  ErrorMessage:string = '';
+  ErrorMessage: string = '';
 
   constructor(public firebase: FirebaseServiceService) {
 
@@ -41,7 +43,8 @@ export class PasswordForgottenComponent {
       if (await emailExists) {
         this.displayfurtherQuestions = true;
         this.disableMailInput();
-        this.buttonDisabled = true;
+        this.buttonDisabled = true; 
+        this.saveUserId();    
       } else {
         this.displayfurtherQuestions = false;
         this.toggleDisplayError();
@@ -49,6 +52,13 @@ export class PasswordForgottenComponent {
         this.email = '';
       }
     }
+  }
+
+  /**
+   * This function saves the userId for the user who is changing its password
+   */
+  async saveUserId(){
+    this.userId = await this.firebase.getUserId(this.email);   
   }
 
   /**
@@ -98,8 +108,6 @@ export class PasswordForgottenComponent {
   async getnachnameFromFirebase() {
     let nachnameFromFirebase = this.firebase.getNachname(this.nachname);
     if (await nachnameFromFirebase == this.nachname) {
-      console.log(nachnameFromFirebase);
-      console.log(this.nachname);
       this.displayPasswortInputs();
     } else {
       this.toggleDisplayError();
@@ -120,9 +128,9 @@ export class PasswordForgottenComponent {
    * This function updates the user password in the firebase database
    */
   updatePassword() {
-    if(this.password === this.repeatedPassword){
-      console.log('neues Passwort lautet: ', this.password);
-    }else{
+    if (this.password === this.repeatedPassword) {
+      // Update Passwort
+    } else {
       this.toggleDisplayError();
       this.ErrorMessage = 'Die eingegebenen Passwörter stimmen nicht überein!';
       this.password = '';
@@ -133,11 +141,11 @@ export class PasswordForgottenComponent {
   /**
    * This function toggles a variable to display an Error-Message for 4 seconds
    */
-  toggleDisplayError(){
+  toggleDisplayError() {
     this.displayError = true;
-    setTimeout(()=>{
+    setTimeout(() => {
       this.displayError = false;
-    },4000);
+    }, 4000);
   }
 
 }
