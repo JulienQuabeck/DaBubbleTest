@@ -26,6 +26,7 @@ export class PasswordForgottenComponent {
   displayfurtherQuestions2: boolean = false;
   displayNewPasswordInputs: boolean = false;
   displayError: boolean = false;
+  ErrorMessage:string = '';
 
   constructor(public firebase: FirebaseServiceService) {
 
@@ -43,6 +44,9 @@ export class PasswordForgottenComponent {
         this.buttonDisabled = true;
       } else {
         this.displayfurtherQuestions = false;
+        this.toggleDisplayError();
+        this.ErrorMessage = 'Es wurde kein Account mit der eingegebenen E-Mail Adresse gefunden!';
+        this.email = '';
       }
     }
   }
@@ -75,7 +79,8 @@ export class PasswordForgottenComponent {
       this.displayNachnameInput();
     } else {
       this.toggleDisplayError();
-      console.log('Name fehlerhaft');
+      this.ErrorMessage = 'Der eingegebene Name stimmt nicht mit dem zu diesem Account hinterlegten Namen überein!';
+      this.name = '';
     }
   }
 
@@ -98,7 +103,8 @@ export class PasswordForgottenComponent {
       this.displayPasswortInputs();
     } else {
       this.toggleDisplayError();
-      console.log('Nachname fehlerhaft');
+      this.ErrorMessage = 'Der eingegebene Nachname stimmt nicht mit dem zu diesem Account hinterlegten Nachnamen überein!';
+      this.nachname = '';
     }
   }
 
@@ -117,8 +123,10 @@ export class PasswordForgottenComponent {
     if(this.password === this.repeatedPassword){
       console.log('neues Passwort lautet: ', this.password);
     }else{
-      this.toggleDisplayError()
-      console.log('die Passwörter stimmen nicht überein!');
+      this.toggleDisplayError();
+      this.ErrorMessage = 'Die eingegebenen Passwörter stimmen nicht überein!';
+      this.password = '';
+      this.repeatedPassword = '';
     }
   }
 
