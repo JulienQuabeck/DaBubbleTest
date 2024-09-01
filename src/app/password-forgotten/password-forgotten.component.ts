@@ -4,6 +4,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { FirebaseServiceService } from '../firebase-Service/firebase-service.service';
 import { NgClass } from '@angular/common';
 import { User } from '../../models/user.class';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-password-forgotten',
@@ -29,8 +30,15 @@ export class PasswordForgottenComponent {
   displayNewPasswordInputs: boolean = false;
   displayError: boolean = false;
   ErrorMessage: string = '';
+  user:User = {
+    id: this.userId,
+    email: this.email,
+    name: this.name,
+    nachname: this.nachname,
+    passwort: this.password
+  }
 
-  constructor(public firebase: FirebaseServiceService) {
+  constructor(public firebase: FirebaseServiceService, private router: Router) {
 
   }
 
@@ -127,15 +135,36 @@ export class PasswordForgottenComponent {
   /**
    * This function updates the user password in the firebase database
    */
-  updatePassword() {
+ updatePassword() {
     if (this.password === this.repeatedPassword) {
-      // Update Passwort
+      let user = this.createUser();
+      this.firebase.updatePasswort(user);
+      this.ErrorMessage = "Ihr Passwort wurde erfolgreich geändert!";
+      this.toggleDisplayError();
+      setTimeout(()=>{
+        this.router.navigate(['/']);
+      },4000);
     } else {
       this.toggleDisplayError();
       this.ErrorMessage = 'Die eingegebenen Passwörter stimmen nicht überein!';
       this.password = '';
       this.repeatedPassword = '';
     }
+  }
+
+  /**
+   * This function creates a new user with the new password
+   * @returns a User with the new password
+   */
+  createUser(){
+    let user= {
+      id: this.userId,
+      email: this.email,
+      name: this.name,
+      nachname: this.nachname,
+      passwort: this.password
+    }
+    return user;
   }
 
   /**

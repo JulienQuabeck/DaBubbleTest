@@ -89,9 +89,9 @@ export class FirebaseServiceService {
     }
   }
 
-  async gettingQuery(email:string){
+  async gettingQuery(email: string) {
     const q = query(this.getUserRef(), where("email", "==", email));
-    const querySnapshot = await getDocs(q);  
+    const querySnapshot = await getDocs(q);
     return querySnapshot;
   }
 
@@ -104,7 +104,7 @@ export class FirebaseServiceService {
     try {
       // const q = query(this.getUserRef(), where("email", "==", email));
       // const querySnapshot = await getDocs(q);     
-      const querySnapshot = await this.gettingQuery(email); 
+      const querySnapshot = await this.gettingQuery(email);
       return !querySnapshot.empty;
     } catch (err) {
       console.error("Error checking email existence: ", err);
@@ -117,9 +117,9 @@ export class FirebaseServiceService {
    * @param email written email (in change Passwort section)
    * @returns the userId in Firebase
    */
-  async getUserId(email:string){
+  async getUserId(email: string) {
     let querySnapshot = await this.gettingQuery(email);
-    if(!querySnapshot.empty){
+    if (!querySnapshot.empty) {
       let userId = await querySnapshot.docs[0].data()['id'];
       return userId;
     }
@@ -153,7 +153,7 @@ export class FirebaseServiceService {
    * @param enteredPasswort written password
    * @returns true or false
    */
-  async verifyPassword(email:string, enteredPasswort: string){
+  async verifyPassword(email: string, enteredPasswort: string) {
     const password = await this.getPasswort(email);
     if (password == enteredPasswort) {
       return true;
@@ -165,7 +165,7 @@ export class FirebaseServiceService {
   /**
    * This function gets the name for the email the users wants to change the password for
    */
-  async getName(name:string){
+  async getName(name: string) {
     try {
       const q = query(this.getUserRef(), where("name", "==", name));
       const querySnapshot = await getDocs(q);
@@ -182,10 +182,10 @@ export class FirebaseServiceService {
     }
   }
 
-    /**
-   * This function gets the surname for the email the users wants to change the password for
-   */
-  async getNachname(nachname:string){
+  /**
+ * This function gets the surname for the email the users wants to change the password for
+ */
+  async getNachname(nachname: string) {
     try {
       const q = query(this.getUserRef(), where("nachname", "==", nachname));
       const querySnapshot = await getDocs(q);
@@ -202,14 +202,14 @@ export class FirebaseServiceService {
     }
   }
 
-  async updatePasswort(user:User){
-    console.log(user);
-    // await updateDoc(this.getSingleUserRef("user", user.id), this.getCleanJson(user)).catch(
-    //   (err) => { console.log(err); });
+  async updatePasswort(user: User) {
+    await updateDoc(this.getSingleUserRef("user", user.id), this.getCleanJson(user)).catch(
+      (err) => { console.log(err); });
+
   }
 
 
-  getCleanJson(user: User):{}{
+  getCleanJson(user: User): {} {
     return {
       id: user.id,
       email: user.email,
