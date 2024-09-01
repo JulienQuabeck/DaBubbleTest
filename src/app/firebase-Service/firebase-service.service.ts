@@ -208,7 +208,6 @@ export class FirebaseServiceService {
 
   }
 
-
   getCleanJson(user: User): {} {
     return {
       id: user.id,

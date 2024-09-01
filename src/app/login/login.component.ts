@@ -39,6 +39,9 @@ export class LoginComponent {
   password: string = '';
   loginPossible: boolean = false;
   emailOrPasswordWrong: boolean = false;
+  id: string = '';
+  name: string = '';
+  nachname: string = '';
 
   constructor(public firebase: FirebaseServiceService, private router: Router, public generalService: GeneralService) { }
 
@@ -51,7 +54,10 @@ export class LoginComponent {
     if (await emailExists) {
       let passwordVerified = await this.firebase.verifyPassword(this.email, this.password);
       if (passwordVerified) {
-        this.router.navigate(['/dashboard']);
+        let id = await this.getParams();
+        // hier muss eingebaut werden, dass die id der name und der nachname des users abgerufen wird, und dann mit zum dashboard übergeben wird.
+        this.router.navigate(['/dashboard', id]);
+        // this.router.navigate(['/dashboard']);
       } else {
         this.setTimeoutForErrorMessage();
       }
@@ -60,6 +66,15 @@ export class LoginComponent {
     }
     this.email = '';
     this.password = '';
+  }
+
+  /**
+   * This function pulls the user id out of the firebase database to send it to the dashboard after login
+   * @returns 
+   */
+  async getParams(){
+    let id = await this.firebase.getUserId(this.email);
+    return id;
   }
 
   /**
@@ -78,6 +93,4 @@ export class LoginComponent {
   showHidePassword() {
     this.generalService.showHidePassword();
   }
-
 }
-
