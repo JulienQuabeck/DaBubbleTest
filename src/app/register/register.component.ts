@@ -9,6 +9,7 @@ import { User } from '../../models/user.class';
 import { FormsModule } from '@angular/forms';
 import { FirebaseServiceService } from '../firebase-Service/firebase-service.service';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { GeneralService } from '../general-Service/general.service';
 
 @Component({
   selector: 'app-register',
@@ -32,7 +33,7 @@ export class RegisterComponent {
   loading = false;
   registerUserData: any;
   UserAlreadyExists: boolean = false;
-  constructor(public firebase: FirebaseServiceService, private router: Router) {
+  constructor(public firebase: FirebaseServiceService, private router: Router, public generalService: GeneralService) {
 
   }
 
@@ -54,6 +55,10 @@ export class RegisterComponent {
       this.router.navigate(['/dashboard']);
     }
     this.loading = false;
+  }
+
+  showHidePassword(){
+    this.generalService.showHidePassword();
   }
 
 }

@@ -5,6 +5,7 @@ import { FirebaseServiceService } from '../firebase-Service/firebase-service.ser
 import { NgClass } from '@angular/common';
 import { User } from '../../models/user.class';
 import { Router } from '@angular/router';
+import { GeneralService } from '../general-Service/general.service';
 
 @Component({
   selector: 'app-password-forgotten',
@@ -38,7 +39,7 @@ export class PasswordForgottenComponent {
     passwort: this.password
   }
 
-  constructor(public firebase: FirebaseServiceService, private router: Router) {
+  constructor(public firebase: FirebaseServiceService, private router: Router, public generalService: GeneralService) {
 
   }
 
@@ -175,6 +176,13 @@ export class PasswordForgottenComponent {
     setTimeout(() => {
       this.displayError = false;
     }, 4000);
+  }
+
+  /**
+   * This function refers to the showHidePassword-Funktion of the general Service
+   */
+  showHidePassword(){
+    this.generalService.showHidePassword();
   }
 
 }

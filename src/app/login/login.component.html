@@ -18,14 +18,15 @@
         <form>
             <div class="input-container">
                 <div class="input-background">
-                    <mat-icon fontIcon="mail"></mat-icon>
+                    <mat-icon fontIcon="mail" class="leftIcon"></mat-icon>
                     <input name="email" id="email" [(ngModel)]="email" autocomplete="email"
                         placeholder="beispielname@email.com" required>
                 </div>
                 <div class="input-background">
-                    <mat-icon fontIcon="lock"></mat-icon>
-                    <input name="password" id="password" [(ngModel)]="password" type="password" placeholder="Passwort"
+                    <mat-icon fontIcon="lock" class="leftIcon"></mat-icon>
+                    <input name="password" id="password" [(ngModel)]="password" [type]="generalService.passwordType" placeholder="Passwort"
                         required>
+                    <mat-icon fontIcon="visibility" class="showHidePassword" (click)="showHidePassword();"></mat-icon>
                 </div>
 
                 <span class="pwForgotten" routerLink="/passwortForgotten">Passwort vergessen?</span>
@@ -60,10 +61,11 @@
 </section>
 
 @if (emailOrPasswordWrong){
-    <div class="emailOrPasswirdWrong-Container">
-        <div>
-            <h1>Die eingegebene E-Mail Adresse oder das eingegebene Passwort waren fehlerhaft oder noch nicht vorhanden.</h1>
-            <h2>Bitte überprüfen Sie Ihre Eingaben, oder registrieren Sie sich über den Button "Konto erstellen".</h2>
-        </div>
+<div class="emailOrPasswirdWrong-Container">
+    <div>
+        <h1>Die eingegebene E-Mail Adresse oder das eingegebene Passwort waren fehlerhaft oder noch nicht vorhanden.
+        </h1>
+        <h2>Bitte überprüfen Sie Ihre Eingaben, oder registrieren Sie sich über den Button "Konto erstellen".</h2>
     </div>
+</div>
 }

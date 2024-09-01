@@ -11,6 +11,7 @@ import { FormsModule } from '@angular/forms';
 import { RegisterComponent } from '../register/register.component';
 import { FirebaseServiceService } from '../firebase-Service/firebase-service.service';
 import { PasswordForgottenComponent } from '../password-forgotten/password-forgotten.component';
+import { GeneralService } from '../general-Service/general.service';
 
 
 @Component({
@@ -39,7 +40,7 @@ export class LoginComponent {
   loginPossible: boolean = false;
   emailOrPasswordWrong: boolean = false;
 
-  constructor(public firebase: FirebaseServiceService, private router: Router) { }
+  constructor(public firebase: FirebaseServiceService, private router: Router, public generalService: GeneralService) { }
 
   /**
    * This function checks, if the entered email-adress is saved in the firebase database, if so, it checks the entered password with the saved one for the entered email.
@@ -70,5 +71,13 @@ export class LoginComponent {
       this.emailOrPasswordWrong = false;
     }, 4000);
   }
+
+  /**
+ * This function refers to the showHidePassword-Funktion of the general Service
+ */
+  showHidePassword() {
+    this.generalService.showHidePassword();
+  }
+
 }
 

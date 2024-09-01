@@ -19,8 +19,9 @@
                 </div>
                 <div class="right-container">
                     <div class="input-background">
-                        <input name="Passwort" id="Passwort" [(ngModel)]="user.passwort" type="password"
+                        <input name="Passwort" id="Passwort" [(ngModel)]="user.passwort" [type]="generalService.passwordType"
                             autocomplete="Passwort" placeholder="Passwort" required>
+                            <mat-icon fontIcon="visibility" class="showHidePassword" (click)="showHidePassword();"></mat-icon>
                     </div>
                     <div class="input-background">
                         <input name="wdh-Passwort" id="wdh-Passwort" type="password" autocomplete="wdh-Passwort"
