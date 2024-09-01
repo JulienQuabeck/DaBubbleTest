@@ -39,23 +39,30 @@ section {
 .left-container {
     width: 50%;
     height: 80%;
-    display:flex;
+    display: flex;
     flex-direction: column;
     align-items: center;
-    padding:20px;
-    box-sizing:border-box;
-    gap:50px;
+    padding: 20px;
+    box-sizing: border-box;
+    gap: 50px;
 }
 
 .right-container {
     width: 50%;
     height: 80%;
-    display:flex;
+    display: flex;
     flex-direction: column;
     align-items: center;
-    padding:20px;
-    box-sizing:border-box;
-    gap:50px;
+    padding: 20px;
+    box-sizing: border-box;
+    gap: 50px;
+}
+
+.leftIcon {
+    position: absolute;
+    left: 10px;
+    transform: scale(0.8);
+    color: gray;
 }
 
 .input-background {
@@ -75,7 +82,7 @@ section {
         width: 70%;
         height: 100%;
         box-sizing: border-box;
-        font-size:20px;
+        font-size: 20px;
 
         &:focus {
             outline: unset;
@@ -84,10 +91,11 @@ section {
     }
 }
 
-.button-container{
-    display:flex;
-    gap:40px;
-    button{
+.button-container {
+    display: flex;
+    gap: 40px;
+
+    button {
         color: white;
         background-color: rgb(70, 77, 224);
         border-radius: 20px;
@@ -96,54 +104,57 @@ section {
     }
 }
 
-.loadingScreen{
-    z-index:999;
-    background-color:white;
-    position:absolute;
-    top:0;
-    bottom:0;
-    right:0;
-    left:0;
-    display:flex;
-    justify-content: center;
-    align-items: center;
-    opacity:0.6;
-    mat-spinner{
-        opacity: 1;
-    }
-}
-
-.existingUser{
-    z-index:998;
-    background-color:white;
-    position:absolute;
-    top:0;
-    bottom:0;
-    right:0;
-    left:0;
-    display:flex;
-    justify-content: center;
-    align-items: center;
-    opacity:0.9;
-    div{
-        z-index:999;
-        width:50%;
-        border:1px solid black;
-        border-radius:20px;
-        padding:20px;
-        opacity: 1;
-        color:black;
-        font-weight:bold;
-        text-align:center;
-    }
-}
-
-.showHidePassword{
+.loadingScreen {
+    z-index: 999;
+    background-color: white;
     position: absolute;
-    right:20px;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0.6;
+
+    mat-spinner {
+        opacity: 1;
+    }
+}
+
+.existingUser {
+    z-index: 998;
+    background-color: white;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0.9;
+
+    div {
+        z-index: 999;
+        width: 50%;
+        border: 1px solid black;
+        border-radius: 20px;
+        padding: 20px;
+        opacity: 1;
+        color: black;
+        font-weight: bold;
+        text-align: center;
+    }
+}
+
+.showHidePassword {
+    position: absolute;
+    right: 20px;
     transform: scale(0.8);
     color: gray;
-    &:hover{
-        cursor:pointer;
+
+    &:hover {
+        cursor: pointer;
     }
 }

@@ -5,27 +5,36 @@
             <div class="container">
                 <div class="left-container">
                     <div class="input-background">
+                        <mat-icon class="leftIcon">badge</mat-icon>
                         <input name="Name" id="Name" [(ngModel)]="user.name" autocomplete="Name" placeholder="Name"
                             required>
                     </div>
                     <div class="input-background">
+                        <mat-icon class="leftIcon">badge</mat-icon>
                         <input name="Nachname" id="Nachname" [(ngModel)]="user.nachname" autocomplete="Nachname"
                             placeholder="Nachname" required>
                     </div>
                     <div class="input-background">
+                        <mat-icon class="leftIcon">mail</mat-icon>
                         <input name="E-Mail" id="E-Mail" [(ngModel)]="user.email" autocomplete="E-Mail"
                             placeholder="E-Mail" required>
                     </div>
                 </div>
                 <div class="right-container">
                     <div class="input-background">
-                        <input name="Passwort" id="Passwort" [(ngModel)]="user.passwort" [type]="generalService.passwordType"
-                            autocomplete="Passwort" placeholder="Passwort" required>
-                            <mat-icon fontIcon="visibility" class="showHidePassword" (click)="showHidePassword();"></mat-icon>
+                        <mat-icon class="leftIcon">password</mat-icon>
+                        <input name="Passwort" id="Passwort" [(ngModel)]="user.passwort"
+                            [type]="generalService.passwordType" autocomplete="Passwort" placeholder="Passwort"
+                            required>
+                        <mat-icon fontIcon="visibility" class="showHidePassword"
+                            (click)="showHidePassword()"></mat-icon>
                     </div>
                     <div class="input-background">
-                        <input name="wdh-Passwort" id="wdh-Passwort" type="password" autocomplete="wdh-Passwort"
-                            placeholder="Passwort wiederholen" required>
+                        <mat-icon class="leftIcon">password</mat-icon>
+                        <input name="wdh-Passwort" id="wdh-Passwort" [type]="generalService.passwordType"
+                            autocomplete="wdh-Passwort" placeholder="Passwort wiederholen" required>
+                        <mat-icon fontIcon="visibility" class="showHidePassword"
+                            (click)="showHidePassword()"></mat-icon>
                     </div>
                     <div class="button-container">
                         <button mat-flat-button routerLink="/">zurück</button>
@@ -44,10 +53,11 @@
 }
 
 @if(UserAlreadyExists){
-    <div class="existingUser">
-        <div>
-            <h1>Diese verwendete E-mail existiert bereits. Bitte loggen Sie sich mit dieser ein.</h1>
-            <h2>Sollten Sie ihr Passwort vergessen haben, dann klicken sie unterhalb des Login-Bereichs auf "Passwort vergessen".</h2>
-        </div>
+<div class="existingUser">
+    <div>
+        <h1>Diese verwendete E-mail existiert bereits. Bitte loggen Sie sich mit dieser ein.</h1>
+        <h2>Sollten Sie ihr Passwort vergessen haben, dann klicken sie unterhalb des Login-Bereichs auf "Passwort
+            vergessen".</h2>
     </div>
+</div>
 }
